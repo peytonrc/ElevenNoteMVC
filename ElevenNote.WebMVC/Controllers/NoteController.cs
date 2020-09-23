@@ -1,4 +1,6 @@
 ﻿using ElevenNote.Models;
+using ElevenNote.Services;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,14 @@ namespace ElevenNote.WebMVC.Controllers
     public class NoteController : Controller // Path: localhost:xxxx/Note
     {
         // GET: Note
-        public ActionResult Index() // ActionResult is a return type; allows us to return a View() method
+        public ActionResult Index() // ActionResult is a return type; allows us to return a View() method : Displays all notes for current user
         {
-            var model = new NoteListItem[0]; // Initializing a new instance of the NoteListItem as an IEnumerable with the [0] syntax
-            
+           // var model = new NoteListItem[0]; ---> Initializing a new instance of the NoteListItem as an IEnumerable with the [0] syntax
+
+            Guid userId = Guid.Parse(User.Identity.GetUserId());
+            NoteService service = new NoteService(userId);
+            var model = service.GetNotes();
+
             return View(model); // Returns a view for the above path: "...Note/Index"
         }
 
@@ -27,13 +33,18 @@ namespace ElevenNote.WebMVC.Controllers
         // POST: Note/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(NoteCreate model)
+        public ActionResult Create(NoteCreate model) // Makes sure the model is valid, grabs the userId, calls on CreateNote model, and returns the user back to the index view
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-
+                return View(model);
             }
-            return View();
+
+            Guid userId = Guid.Parse(User.Identity.GetUserId());
+            NoteService service = new NoteService(userId);
+            service.CreateNote(model);
+
+            return RedirectToAction("Index");
         }
 
     }

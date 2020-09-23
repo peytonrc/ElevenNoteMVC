@@ -35,7 +35,7 @@ namespace ElevenNote.Services
             }
         }
 
-        // Get Notes Method
+        // Get Notes Method : See all notes from a specific user
         public IEnumerable<NoteListItem> GetNotes()
         {
             using (ApplicationDbContext ctx = new ApplicationDbContext())
