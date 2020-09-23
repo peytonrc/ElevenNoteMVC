@@ -17,5 +17,24 @@ namespace ElevenNote.WebMVC.Controllers
             
             return View(model); // Returns a view for the above path: "...Note/Index"
         }
+
+        // GET: Note/Create
+        public ActionResult Create() // Method that GETS the create VIEW
+        {
+            return View();
+        }
+
+        // POST: Note/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(NoteCreate model)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+            return View();
+        }
+
     }
 }
