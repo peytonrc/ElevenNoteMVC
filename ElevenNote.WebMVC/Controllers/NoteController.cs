@@ -35,17 +35,26 @@ namespace ElevenNote.WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(NoteCreate model) // Makes sure the model is valid, grabs the userId, calls on CreateNote model, and returns the user back to the index view
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) return View(model);
+
+            var service = CreateNoteService();
+
+            if (service.CreateNote(model))
             {
-                return View(model);
-            }
+                TempData["SaveResult"] = "Your note was created."; // Tempdata removes info after it's accessed
+                return RedirectToAction("Index");
+            };
 
-            Guid userId = Guid.Parse(User.Identity.GetUserId());
-            NoteService service = new NoteService(userId);
-            service.CreateNote(model);
+            ModelState.AddModelError("", "Note could not be created.");
 
-            return RedirectToAction("Index");
+            return View(model);
         }
 
+        private NoteService CreateNoteService()
+        {
+            Guid userId = Guid.Parse(User.Identity.GetUserId());
+            NoteService service = new NoteService(userId);
+            return service;
+        }
     }
 }
