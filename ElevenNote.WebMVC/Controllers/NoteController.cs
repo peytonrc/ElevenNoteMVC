@@ -127,16 +127,6 @@ namespace ElevenNote.WebMVC.Controllers
             return RedirectToAction("Index");
         }
 
-
-
-
-
-
-
-
-
-
-
         // Helper Method
         private NoteService CreateNoteService()
         {
