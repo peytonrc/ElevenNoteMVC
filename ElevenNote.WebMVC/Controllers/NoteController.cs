@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace ElevenNote.WebMVC.Controllers
 {
@@ -50,7 +51,7 @@ namespace ElevenNote.WebMVC.Controllers
             return View(model);
         }
 
-        // GET: Note/Details
+        // GET: Note/Details{id}
         public ActionResult Details(int id)
         {
             NoteService svc = CreateNoteService();
@@ -59,8 +60,48 @@ namespace ElevenNote.WebMVC.Controllers
             return View(model);
         }
 
+        // GET: Note/Edit{id}
+        public ActionResult Edit(int id)
+        {
+            NoteService service = CreateNoteService();
+            NoteDetail detail = service.GetNoteById(id);
+            NoteEdit model =
+                new NoteEdit
+                {
+                    NoteId = detail.NoteId,
+                    Title = detail.Title,
+                    Content = detail.Content
+                };
 
+            return View(model);
+        }
 
+        // POST: Note/Edit/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, NoteEdit model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            if(model.NoteId != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+
+            NoteService service = CreateNoteService();
+            
+            if (service.UpdateNote(model))
+            {
+                TempData["Save Result"] = "Your note has been updated!";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Your note could not be updated.");
+            return View(model);
+        }
+        
 
 
 

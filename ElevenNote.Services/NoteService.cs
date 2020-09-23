@@ -2,6 +2,7 @@
 using ElevenNote.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,6 +55,7 @@ namespace ElevenNote.Services
             }
         }
 
+        // Get Note Detail By Id
         public NoteDetail GetNoteById(int id)
         {
             using (ApplicationDbContext ctx = new ApplicationDbContext())
@@ -71,6 +73,24 @@ namespace ElevenNote.Services
                         CreatedUtc = entity.CreatedUtc,
                         ModifiedUtc = entity.ModifiedUtc
                     };
+            }
+        }
+
+        // Edit/Update Note By Id
+        public bool UpdateNote(NoteEdit model)
+        {
+            using (ApplicationDbContext ctx = new ApplicationDbContext())
+            {
+                Note entity =
+                    ctx
+                    .Notes
+                    .Single(e => e.NoteId == model.NoteId && e.OwnerId == _userId);
+
+                entity.Title = model.Title;
+                entity.Content = model.Content;
+                entity.ModifiedUtc = DateTimeOffset.UtcNow;
+
+                return ctx.SaveChanges() == 1;
             }
         }
 

@@ -15,7 +15,7 @@ namespace ElevenNote.WebMVC
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
+                url: "{controller}/{action}/{id}", // builds out the Url we see on the webpage
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
