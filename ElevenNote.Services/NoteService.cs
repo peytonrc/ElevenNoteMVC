@@ -94,5 +94,21 @@ namespace ElevenNote.Services
             }
         }
 
+        // Delete Note By Id
+        public bool DeleteNote(int noteId)
+        {
+            using (ApplicationDbContext ctx = new ApplicationDbContext())
+            {
+                Note entity =
+                    ctx
+                        .Notes
+                        .Single(e => e.NoteId == noteId && e.OwnerId == _userId);
+
+                ctx.Notes.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
     }
 }
