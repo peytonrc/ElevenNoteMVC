@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElevenNote.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,5 +17,9 @@ namespace ElevenNote.Models
 
         [MaxLength(8000)]
         public string Content { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public TypeOfNote NoteType { get; set; } // enum example
     }
 }

@@ -66,14 +66,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Category.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\202009231457112_InitialCreate.cs" />
-    <Compile Include="Migrations\202009231457112_InitialCreate.Designer.cs">
-      <DependentUpon>202009231457112_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009231954042_isStarred.cs" />
-    <Compile Include="Migrations\202009231954042_isStarred.Designer.cs">
-      <DependentUpon>202009231954042_isStarred.cs</DependentUpon>
+    <Compile Include="Migrations\202105121707570_initial.cs" />
+    <Compile Include="Migrations\202105121707570_initial.Designer.cs">
+      <DependentUpon>202105121707570_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Note.cs" />
@@ -84,11 +81,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202009231457112_InitialCreate.resx">
-      <DependentUpon>202009231457112_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009231954042_isStarred.resx">
-      <DependentUpon>202009231954042_isStarred.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105121707570_initial.resx">
+      <DependentUpon>202105121707570_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

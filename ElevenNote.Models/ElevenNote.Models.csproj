@@ -66,15 +66,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NoteCreate.cs" />
-    <Compile Include="NoteDetail.cs" />
-    <Compile Include="NoteEdit.cs" />
-    <Compile Include="NoteListItem.cs" />
+    <Compile Include="CategoryModels\CategoryCreate.cs" />
+    <Compile Include="CategoryModels\CategoryDetail.cs" />
+    <Compile Include="CategoryModels\CategoryEdit.cs" />
+    <Compile Include="CategoryModels\CategoryListItem.cs" />
+    <Compile Include="NoteModels\NoteCreate.cs" />
+    <Compile Include="NoteModels\NoteDetail.cs" />
+    <Compile Include="NoteModels\NoteEdit.cs" />
+    <Compile Include="NoteModels\NoteListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ElevenNote.Data\ElevenNote.Data.csproj">
+      <Project>{5232e8ff-e768-4681-8025-c6dfd005f2c4}</Project>
+      <Name>ElevenNote.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

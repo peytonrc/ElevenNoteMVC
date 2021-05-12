@@ -26,6 +26,8 @@ namespace ElevenNote.Services
                 OwnerId = _userId,
                 Title = model.Title,
                 Content = model.Content,
+                NoteType = model.NoteType,
+                CategoryId = model.CategoryId,
                 CreatedUtc = DateTimeOffset.Now
             };
 
@@ -49,6 +51,8 @@ namespace ElevenNote.Services
                     {
                         NoteId = e.NoteId,
                         Title = e.Title,
+                        NoteType = e.NoteType,
+                        Category = e.CategoryId + " " + e.Category.Name,
                         IsStarred = e.IsStarred,
                         CreatedUtc = e.CreatedUtc
                     });
@@ -71,6 +75,7 @@ namespace ElevenNote.Services
                         NoteId = entity.NoteId,
                         Title = entity.Title,
                         Content = entity.Content,
+                        Category = entity.CategoryId + " " + entity.Category.Name,
                         CreatedUtc = entity.CreatedUtc,
                         ModifiedUtc = entity.ModifiedUtc
                     };
@@ -89,6 +94,7 @@ namespace ElevenNote.Services
 
                 entity.Title = model.Title;
                 entity.Content = model.Content;
+                entity.CategoryId = model.CategoryId;
                 entity.ModifiedUtc = DateTimeOffset.UtcNow;
                 entity.IsStarred = model.IsStarred;
 

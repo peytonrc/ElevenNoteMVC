@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,8 @@ namespace ElevenNote.Data
         [Required]
         public string Content { get; set; }
 
+        public TypeOfNote NoteType { get; set; } // enum example
+
         [DefaultValue(false)]
         public bool IsStarred { get; set; }
 
@@ -32,5 +35,22 @@ namespace ElevenNote.Data
 
         [Display(Name = "Modified")]
         public DateTimeOffset? ModifiedUtc { get; set; } //can be null bc of "?"
+
+        [ForeignKey(nameof(Category))]
+        public int CategoryId { get; set; }
+
+        public virtual Category Category { get; set; }
+
+    }
+
+    public enum TypeOfNote // enum example
+    {
+        [Display(Name = "School")]
+        S,
+        [Display(Name = "To Do")]
+        TD,
+        [Display(Name = "Important")]
+        I,
+
     }
 }

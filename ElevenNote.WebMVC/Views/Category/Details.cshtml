@@ -1,0 +1,65 @@
+﻿@model ElevenNote.Models.CategoryModels.CategoryDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CategoryDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Notes[0].NoteId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notes[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notes.First().CreatedUtc)
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Notes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoteId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedUtc)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
